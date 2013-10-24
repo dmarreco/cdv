@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>cdv-mobili-parent</artifactId>
+        <groupId>com.cdv</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>cdv-mobili-ear</artifactId>
+    <packaging>ear</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.cdv</groupId>
+            <artifactId>cdv-mobili-jar</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.cdv</groupId>
+            <artifactId>cdv-mobili-ejb</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <type>ejb</type>
+        </dependency>
+        <dependency>
+            <groupId>com.cdv</groupId>
+            <artifactId>cdv-mobili-web</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>cdv-mobili</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>2.8</version>
+                <configuration>
+                    <applicationName>cdv-mobili</applicationName>
+                    <displayName>cdv-mobili</displayName>
+                    <modules>
+                        <webModule>
+                            <artifactId>cdv-mobili-web</artifactId>
+                            <groupId>com.cdv</groupId>
+                            <contextRoot>/cdv-mobili</contextRoot>
+                        </webModule>
+                        <ejbModule>
+                            <artifactId>cdv-mobili-ejb</artifactId>
+                            <groupId>com.cdv</groupId>
+                        </ejbModule>
+                    </modules>
+
+                    <generateApplicationXml>true</generateApplicationXml>
+
+                    <!-- The following setting builds the EAR file in a format suitable
+                        for Glassfish deployment. With this we don't have to copy the libs into Glassfish's
+                        appserver lib directory -->
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
