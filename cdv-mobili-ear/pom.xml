@@ -16,25 +16,25 @@
         <dependency>
             <groupId>com.cdv</groupId>
             <artifactId>cdv-mobili-jar</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${parent.version}</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>com.cdv</groupId>
             <artifactId>cdv-mobili-ejb</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${parent.version}</version>
             <type>ejb</type>
         </dependency>
         <dependency>
             <groupId>com.cdv</groupId>
             <artifactId>cdv-mobili-web</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${parent.version}</version>
             <type>war</type>
         </dependency>
     </dependencies>
 
     <build>
-        <finalName>cdv-mobili-ear.ear</finalName>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
