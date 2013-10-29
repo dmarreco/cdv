@@ -16,7 +16,13 @@
         <dependency>
             <groupId>com.cdv</groupId>
             <artifactId>cdv-mobili-ejb</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
             <scope>provided</scope>
         </dependency>
     </dependencies>

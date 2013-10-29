@@ -1,6 +1,9 @@
-# Arquivos de Projetos #
-###################
+# Arquivos de Metadata da GUI (Eclipse ou IntelliJ)#
+####################################################
 *.iml
+.project
+.settings
+.classpath
 .idea/
 .idea/*
 .idea/.*
