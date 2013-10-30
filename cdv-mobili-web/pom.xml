@@ -16,7 +16,7 @@
         <dependency>
             <groupId>com.cdv</groupId>
             <artifactId>cdv-mobili-ejb</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -42,6 +42,7 @@
                 <configuration>
                     <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
                 </configuration>
+                <version>2.1.1</version>
             </plugin>
         </plugins>
     </build>

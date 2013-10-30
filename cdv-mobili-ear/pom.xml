@@ -16,19 +16,19 @@
         <dependency>
             <groupId>com.cdv</groupId>
             <artifactId>cdv-mobili-jar</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>com.cdv</groupId>
             <artifactId>cdv-mobili-ejb</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
             <type>ejb</type>
         </dependency>
         <dependency>
             <groupId>com.cdv</groupId>
             <artifactId>cdv-mobili-web</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
             <type>war</type>
         </dependency>
     </dependencies>
