@@ -10,7 +10,7 @@ public interface DaoService
   public <T> T update (T t);
   public void delete (Object t);
   public List findAll ();
-  public List find (String queryName);
+  public List find (String queryName); 
   public List find (String queryName, int resultLimit);
   public List find (String queryName, Map<String, Object> parameters);
   public List find (String queryName, Map<String, Object> parameters, int resultLimit);

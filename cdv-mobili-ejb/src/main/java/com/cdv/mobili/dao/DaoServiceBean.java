@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class DaoServiceBean implements DaoService
 {
-  @PersistenceContext
+  @PersistenceContext(name = "cdv-mobili-persistence")
   EntityManager em;
 
   public <T> T create(T t)
