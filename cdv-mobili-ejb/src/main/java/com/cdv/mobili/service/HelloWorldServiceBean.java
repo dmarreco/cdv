@@ -2,7 +2,7 @@ package com.cdv.mobili.service;
 
 import javax.ejb.Stateless;
 
-@Stateless(name = "HelloWorldEJB")
+@Stateless
 public class HelloWorldServiceBean {
     public HelloWorldServiceBean() {
     }

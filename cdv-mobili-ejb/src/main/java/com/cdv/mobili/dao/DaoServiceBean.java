@@ -10,12 +10,12 @@ import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-@Stateless
-@Local(DaoService.class)
-@TransactionAttribute(TransactionAttributeType.MANDATORY)
+//@Stateless
+//@Local(DaoService.class)
+//@TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class DaoServiceBean implements DaoService
 {
-  @PersistenceContext(name = "cdv-mobili-persistence")
+//  @PersistenceContext(name = "cdv-mobili-persistence")
   EntityManager em;
 
   public <T> T create(T t)

@@ -4,9 +4,9 @@ import javax.ejb.ApplicationException;
 
 
 /**
- * Classe genérica de exceção lançada em caso de erro de negócio.
+ * Classe genÃ©rica de exceÃ§Ã£o lanÃ§ada em caso de erro de negÃ³cio.
  * 
- * Pode ser estendida para erros específicos
+ * Pode ser estendida para erros especÃ­ficos
  */
 @ApplicationException (rollback = false)
 public class ApplicationBusinessException extends Exception

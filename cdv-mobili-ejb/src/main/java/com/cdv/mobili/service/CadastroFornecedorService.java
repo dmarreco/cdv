@@ -9,12 +9,12 @@ import javax.ejb.TransactionAttributeType;
 import com.cdv.mobili.dao.DaoService;
 import com.cdv.mobili.domain.Fornecedor;
 
-@Stateless
-@LocalBean
-@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+//@Stateless
+//@LocalBean
+//@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 public class CadastroFornecedorService
 {
-  @EJB
+//  @EJB
   private DaoService dao;
   
   public Fornecedor create (Fornecedor fornecedor)  {

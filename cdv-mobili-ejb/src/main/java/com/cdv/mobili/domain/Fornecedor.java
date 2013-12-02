@@ -9,17 +9,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Representa um Fornecedor de material 
+ * Representa um Fornecedor de material ã
  *
  */
-@Entity
-@Table(name = "fornecedor")
+//@Entity
+//@Table(name = "fornecedor")
 public class Fornecedor extends EntidadeAbstrata
 {
   private static final long serialVersionUID = 2995991452343344082L;
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+//  @Id
+//  @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
   
   private String cnpj;

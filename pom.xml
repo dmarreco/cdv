@@ -20,6 +20,7 @@
         <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
         <version.jboss.bom>1.0.7.Final</version.jboss.bom>
         <version.jboss.as>7.2.0.Final</version.jboss.as>
+        <version.jsf.api>2.0.9.Final</version.jsf.api>
 
         <!-- other plugin versions -->
         <version.ear.plugin>2.6</version.ear.plugin>
@@ -72,6 +73,12 @@
                 <version>${version.jboss.bom}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.spec.javax.faces</groupId>
+                <artifactId>jboss-jsf-api_2.1_spec</artifactId>
+                <version>${version.jsf.api}</version>
+                <scope>provided</scope>
             </dependency>
 
         </dependencies>
