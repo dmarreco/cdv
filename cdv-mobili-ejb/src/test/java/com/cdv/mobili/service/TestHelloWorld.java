@@ -1,9 +1,10 @@
-package com.cdv.mobili;
+package com.cdv.mobili.service;
 
 import static org.junit.Assert.assertEquals;
 
 import javax.inject.Inject;
 
+import com.cdv.mobili.domain.Fornecedor;
 import com.cdv.mobili.service.HelloWorldServiceBean;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -18,7 +19,7 @@ public class TestHelloWorld
 {
   @Deployment
   public static JavaArchive createTestArchive() {
-      return ShrinkWrap.create(JavaArchive.class, "cdv-mobili-ejb-1.0.0-SNAPSHOT.jar")
+      return ShrinkWrap.create(JavaArchive.class, "cdv-mobili-ejb.jar")
               .addClass(HelloWorldServiceBean.class)
               .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
   }
