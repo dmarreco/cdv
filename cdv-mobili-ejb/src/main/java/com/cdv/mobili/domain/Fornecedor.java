@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
  *
  */
 @Entity
-@Table(name = "fornecedor")
+@Table(name = "Fornecedor")
 public class Fornecedor extends EntidadeAbstrata
 {
     private static final long serialVersionUID = 2995991452343344082L;
@@ -26,9 +26,9 @@ public class Fornecedor extends EntidadeAbstrata
     private Long id;
 
     @NotNull
-    @Size(min = 14, max = 14)
-    @Digits(fraction = 0, integer = 14)
-    @Column(length = 14)
+    @Size(min = 14, max = 18)
+    @Pattern(regexp =  "[0-9]{2}\\.[0-9]{3}\\.[0-9]{3}\\/[0-9]{4}\\-[0-9]{2}")
+    @Column(length = 18, unique = true)
     private String cnpj;
 
     @NotNull
@@ -39,12 +39,15 @@ public class Fornecedor extends EntidadeAbstrata
     @Column(name = "inscricao_estadual", length = 20)
     private String inscricaoEstadual;
 
+    @Size (max = 255)
     @Column(length = 255)
     private String endereco;
 
+    @Size (max = 50)
     @Column(length = 50)
     private String bairro;
 
+    @Size (max = 50)
     @Column(length = 50)
     private String cidade;
 
@@ -52,23 +55,47 @@ public class Fornecedor extends EntidadeAbstrata
     @Column(length = 2)
     private String uf;
 
-
+    @Pattern(regexp = "[0-9]{5}\\-[0-9]{3}")
     @Column(length = 9)
     private String cep;
 
     @Digits(fraction = 0, integer = 12)
     @Size(min = 10, max = 12)
-    @Column(length = )
+    @Column(length = 12)
     private String fone1;
+
+    @Digits(fraction = 0, integer = 12)
+    @Size(min = 10, max = 12)
+    @Column(length = 12)
     private String fone2;
+
+    @Digits(fraction = 0, integer = 12)
+    @Size(min = 10, max = 12)
+    @Column(length = 12)
     private String fax;
+
+    @Digits(fraction = 0, integer = 12)
+    @Size(min = 10, max = 12)
+    @Column(length = 12)
     private String celular;
+
+    @Column(name = "nome_contato", length = 255)
     private String nomeContato;
 
     @Email
+    @Column(length = 150)
     private String email;
+
+    @Column(name = "condicao_pgto", length = 255)
     private String condicaoDePagamento;
+
+    @Digits(fraction = 2, integer = 2)
     private BigDecimal percentualICMS;
+
+
+    /*
+     * Getters / Setters
+     */
 
     public Long getId()  {
         return id;
