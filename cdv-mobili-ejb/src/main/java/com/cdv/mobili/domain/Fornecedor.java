@@ -1,12 +1,12 @@
 package com.cdv.mobili.domain;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.math.BigDecimal;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -26,22 +26,46 @@ public class Fornecedor extends EntidadeAbstrata
     private Long id;
 
     @NotNull
-    @Size(min = 18, max = 18)
-    @Pattern(regexp = "[0-9]{2}'.'[0-9]{3}'.'")
+    @Size(min = 14, max = 14)
+    @Digits(fraction = 0, integer = 14)
+    @Column(length = 14)
     private String cnpj;
 
+    @NotNull
+    @NotEmpty
+    @Column(name = "razao_social", length = 255)
     private String razaoSocial;
+
+    @Column(name = "inscricao_estadual", length = 20)
     private String inscricaoEstadual;
+
+    @Column(length = 255)
     private String endereco;
+
+    @Column(length = 50)
     private String bairro;
+
+    @Column(length = 50)
     private String cidade;
+
+    @Pattern(regexp = "[A-Z]{2}")
+    @Column(length = 2)
     private String uf;
+
+
+    @Column(length = 9)
     private String cep;
+
+    @Digits(fraction = 0, integer = 12)
+    @Size(min = 10, max = 12)
+    @Column(length = )
     private String fone1;
     private String fone2;
     private String fax;
     private String celular;
     private String nomeContato;
+
+    @Email
     private String email;
     private String condicaoDePagamento;
     private BigDecimal percentualICMS;
