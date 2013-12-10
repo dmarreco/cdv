@@ -8,10 +8,11 @@ public interface DaoService
   public <T> T create (T t);
   public <T> T find (Class<T> type, Long id);
   public <T> T update (T t);
-  public void delete (Object t);
-  public List findAll ();
-  public List find (String queryName); 
-  public List find (String queryName, int resultLimit);
-  public List find (String queryName, Map<String, Object> parameters);
-  public List find (String queryName, Map<String, Object> parameters, int resultLimit);
+  public <T> void delete (T t);
+  public <T> List<T> findWithNamedQuery (String queryName); 
+  public <T> List<T> findWithNamedQuery (String queryName, int resultLimit);
+  public <T> List<T> findWithNamedQuery (String queryName, Map<String, Object> parameters);
+  public <T> List<T> findWithNamedQuery (String queryName, Map<String, Object> parameters, int resultLimit);
+  public <T> List<T> findAll(Class<T> type);
+  public <T> List<T> findAll(Class<T> type, int resultLimit);
 }

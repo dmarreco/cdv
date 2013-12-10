@@ -46,7 +46,7 @@ public class CadastroFornecedorServiceIntegrationTest
         novoFornecedor.setCnpj("60.701.190/0001-22");
         novoFornecedor.setRazaoSocial("CDV INDÚSTRIA E COMÉRCIO LTDA.");
 
-        Fornecedor fornecedorCriado = cadastroFornecedorService.create(novoFornecedor);
+        Fornecedor fornecedorCriado = cadastroFornecedorService.cadastrar(novoFornecedor);
 
         /* O ID é gerado automaticamente pelo banco (auto increment/sequence) ao persistir */
         assertNotNull(fornecedorCriado.getId());
@@ -58,7 +58,7 @@ public class CadastroFornecedorServiceIntegrationTest
         Fornecedor novoFornecedor = new Fornecedor();
         novoFornecedor.setRazaoSocial("CDV INDÚSTRIA E COMÉRCIO LTDA.");
 
-        Fornecedor fornecedorCriado = cadastroFornecedorService.create(novoFornecedor);
+        Fornecedor fornecedorCriado = cadastroFornecedorService.cadastrar(novoFornecedor);
     }
 
 }

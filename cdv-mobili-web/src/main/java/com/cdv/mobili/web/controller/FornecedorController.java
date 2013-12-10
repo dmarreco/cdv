@@ -70,7 +70,7 @@ public class FornecedorController {
     }
 
     private void refreshFornecedorList () {
-        this.fornecedores = cadastroFornecedorService.listAllFornecedores();
+        this.fornecedores = cadastroFornecedorService.listarTodosFornecedores();
     }
 
     private String getRootErrorMessage(Exception e) {

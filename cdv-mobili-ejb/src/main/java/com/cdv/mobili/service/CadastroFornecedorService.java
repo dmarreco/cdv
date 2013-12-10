@@ -1,6 +1,7 @@
 package com.cdv.mobili.service;
 
-import javax.ejb.EJB;
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -9,8 +10,6 @@ import javax.inject.Inject;
 
 import com.cdv.mobili.dao.DaoService;
 import com.cdv.mobili.domain.Fornecedor;
-
-import java.util.List;
 
 /**
  * Serviço para prover funcionalidades da camada negócio  relacionadas ao caso de uso "Cadastro de Fornecedor"
@@ -23,16 +22,12 @@ public class CadastroFornecedorService
   @Inject
   private DaoService dao;
   
-  public Fornecedor create (Fornecedor fornecedor)  {
+  public Fornecedor cadastrar (Fornecedor fornecedor)  {
     return dao.create(fornecedor);
   }
 
-    public List<Fornecedor> listAllFornecedores() {
-        //TODO listAllFornecedores
-        return null;
+    public List<Fornecedor> listarTodosFornecedores() {
+        return dao.findAll(Fornecedor.class);
     }
 
-    public void cadastrar(Fornecedor novoFornecedor) {
-        //TODO cadastrar
-    }
 }

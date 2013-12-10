@@ -1,73 +1,103 @@
 package com.cdv.mobili.dao;
 
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.ejb.Local;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 @Stateless
-//@Local(DaoService.class)
-//@TransactionAttribute(TransactionAttributeType.MANDATORY)
+@Local(DaoService.class)
+@TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class DaoServiceBean implements DaoService
 {
   @PersistenceContext
   private EntityManager em;
 
+  @Override
   public <T> T create(T t)
   {
-    this.em.persist(t);
-    this.em.flush();
-    this.em.refresh(t);
+    em.persist(t);
+    em.flush();
+    em.refresh(t);
     return t;
   }
 
+  @Override
   public <T> T find(Class<T> type, Long id)
   {
-    // TODO Auto-generated method stub
-    return null;
+    return em.find(type, id);
   }
 
+  @Override
   public <T> T update(T t)
   {
-    // TODO Auto-generated method stub
-    return null;
+    return em.merge(t);
   }
 
-  public void delete(Object t)
+  @Override
+  public <T> void delete(T t)
   {
-    // TODO Auto-generated method stub
-
+    Object ref = em.getReference(t.getClass(), t);
+    em.remove(ref);
   }
 
-  public List find(String queryName)
+  @Override
+  public <T> List<T> findWithNamedQuery(String queryName)
   {
-    // TODO Auto-generated method stub
-    return null;
+    return findWithNamedQuery(queryName, 0);
   }
 
-  public List find(String queryName, int resultLimit)
+  @Override
+  public <T> List<T> findWithNamedQuery(String queryName, int resultLimit)
   {
-    // TODO Auto-generated method stub
-    return null;
+    Query query = em.createNamedQuery(queryName);
+    
+    if (resultLimit > 0)
+      query.setMaxResults(resultLimit);
+    
+    return query.getResultList();
   }
 
-  public List find(String queryName, Map<String, Object> parameters)
+  @Override
+  public <T> List<T> findWithNamedQuery(String queryName, Map<String, Object> parameters)
   {
-    // TODO Auto-generated method stub
-    return null;
+    return findWithNamedQuery(queryName, parameters, 0);
   }
 
-  public List find(String queryName, Map<String, Object> parameters, int resultLimit)
+  @Override
+  public <T> List<T> findWithNamedQuery(String queryName, Map<String, Object> parameters, int resultLimit)
   {
-    // TODO Auto-generated method stub
-    return null;
+    Query query = em.createNamedQuery(queryName);
+    
+    if (resultLimit > 0) 
+      query.setMaxResults(resultLimit);
+    
+    for (Entry<String, Object> entry : parameters.entrySet()) {
+      query.setParameter(entry.getKey(), entry.getValue());
+    }
+    
+    return query.getResultList();
   }
 
-  public List findAll()
+  @Override
+  public <T> List<T> findAll(Class<T> type)
   {
-    // TODO Auto-generated method stub
-    return null;
+    return findAll(type, 0);
+  }
+
+  @Override
+  public <T> List<T> findAll(Class<T> type, int resultLimit)
+  {
+    String entityName = em.getMetamodel().entity(type).getName();
+    Query q = em.createQuery("FROM " + entityName);
+    return q.getResultList();
   }
 
 }
