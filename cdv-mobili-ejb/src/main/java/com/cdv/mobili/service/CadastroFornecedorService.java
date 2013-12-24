@@ -50,7 +50,7 @@ public class CadastroFornecedorService
   
   public Fornecedor obterFornecedorPorCnpj (String cnpj) 
   {
-    List<Fornecedor> fornecedores = dao.findWithNamedQuery(findByCnpj, with("cnpj", cnpj).parameters());
+    List<Fornecedor> fornecedores = dao.findBy(findByCnpj, with("cnpj", cnpj).parameters());
     
     return (fornecedores.isEmpty() ? null : fornecedores.get(0));
   }
