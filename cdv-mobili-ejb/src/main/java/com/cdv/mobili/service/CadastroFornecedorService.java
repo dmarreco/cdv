@@ -29,8 +29,8 @@ public class CadastroFornecedorService
   @EJB
   private DaoService dao;
   
-  @Inject
-  private Logger log;
+//  @Inject
+//  private Logger log;
 
   public Fornecedor cadastrar(Fornecedor fornecedor) throws ApplicationBusinessException
   {
