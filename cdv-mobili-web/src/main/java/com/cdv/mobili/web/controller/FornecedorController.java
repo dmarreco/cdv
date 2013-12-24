@@ -2,6 +2,7 @@ package com.cdv.mobili.web.controller;
 
 
 import com.cdv.mobili.domain.Fornecedor;
+import com.cdv.mobili.exception.ApplicationBusinessException;
 import com.cdv.mobili.service.CadastroFornecedorService;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +15,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import java.util.List;
 
 /**
@@ -59,37 +61,17 @@ public class FornecedorController {
     public void cadastrar() throws Exception {
         try {
             cadastroFornecedorService.cadastrar(novoFornecedor);
-            facesContext.addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado!", "Fornecedor cadastrado com sucesso!"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado!", "Fornecedor cadastrado com sucesso!"));
             init();
-        } catch (Exception e) {
-            String errorMessage = getRootErrorMessage(e);
-            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Falha ao cadastrar");
+        } 
+        catch (ApplicationBusinessException e) {
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getLocalizedMessage(), "Falha ao cadastrar");
             facesContext.addMessage(null, m);
         }
     }
 
     private void refreshFornecedorList () {
         this.fornecedores = cadastroFornecedorService.listarTodosFornecedores();
-    }
-
-    private String getRootErrorMessage(Exception e) {
-        // Default to general error message that registration failed.
-        String errorMessage = "Registration failed. See server log for more information";
-        if (e == null) {
-            // This shouldn't happen, but return the default messages
-            return errorMessage;
-        }
-
-        // Start with the exception and recurse to find the root cause
-        Throwable t = e;
-        while (t != null) {
-            // Get the message from the Throwable class instance
-            errorMessage = t.getLocalizedMessage();
-            t = t.getCause();
-        }
-        // This is the root cause message
-        return errorMessage;
     }
 
 }

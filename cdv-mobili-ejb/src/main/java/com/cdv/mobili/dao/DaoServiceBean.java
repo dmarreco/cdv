@@ -11,6 +11,9 @@ import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.validation.ValidationException;
+
+import com.cdv.mobili.domain.EntidadeAbstrata;
 
 @Stateless
 @Local(DaoService.class)
@@ -21,41 +24,59 @@ public class DaoServiceBean implements DaoService
   private EntityManager em;
 
   @Override
-  public <T> T create(T t)
-  {
-    em.persist(t);
-    em.flush();
-    em.refresh(t);
-    return t;
+  public <T extends EntidadeAbstrata> T create(T t) throws CheckedValidationException
+  { 
+    try {
+      em.persist(t);
+      em.flush();
+      em.refresh(t);
+      return t;
+    }
+    catch (ValidationException e) {
+      throw new CheckedValidationException(e);
+    }
   }
 
   @Override
-  public <T> T find(Class<T> type, Long id)
+  public <T extends EntidadeAbstrata> T find(Class<T> type, Long id)
   {
-    return em.find(type, id);
+    T res = em.find(type, id);
+    
+    if (res == null)
+      throw new EntidadeInexistenteException(type, id);
+    
+    return res;
   }
 
   @Override
-  public <T> T update(T t)
+  public <T extends EntidadeAbstrata> T update(T t) throws CheckedValidationException
   {
-    return em.merge(t);
+    try {
+      T merged = em.merge(t);
+      em.flush();
+      return merged;
+    }
+    catch (ValidationException e) {
+      throw new CheckedValidationException(e);
+    }
   }
 
   @Override
-  public <T> void delete(T t)
+  public <T extends EntidadeAbstrata> void delete(T t)
   {
     Object ref = em.getReference(t.getClass(), t);
     em.remove(ref);
+    em.flush();
   }
 
   @Override
-  public <T> List<T> findWithNamedQuery(String queryName)
+  public <T extends EntidadeAbstrata> List<T> findBy(String queryName)
   {
-    return findWithNamedQuery(queryName, 0);
+    return findBy(queryName, 0);
   }
 
   @Override
-  public <T> List<T> findWithNamedQuery(String queryName, int resultLimit)
+  public <T extends EntidadeAbstrata> List<T> findBy(String queryName, int resultLimit)
   {
     Query query = em.createNamedQuery(queryName);
     
@@ -64,15 +85,31 @@ public class DaoServiceBean implements DaoService
     
     return query.getResultList();
   }
-
+  
   @Override
-  public <T> List<T> findWithNamedQuery(String queryName, Map<String, Object> parameters)
+  public <T extends EntidadeAbstrata> T findFirstBy(String queryName)
   {
-    return findWithNamedQuery(queryName, parameters, 0);
+    List<T> list = findBy(queryName, 1);
+    
+    return list.isEmpty() ? null : list.get(0);
   }
 
   @Override
-  public <T> List<T> findWithNamedQuery(String queryName, Map<String, Object> parameters, int resultLimit)
+  public <T extends EntidadeAbstrata> List<T> findBy(String queryName, Map<String, Object> parameters)
+  {
+    return findBy(queryName, parameters, 0);
+  }
+  
+  @Override
+  public <T extends EntidadeAbstrata> T findFirstBy(String queryName, Map<String, Object> parameters)
+  {
+    List<T> list = findBy(queryName, parameters, 1);
+    
+    return list.isEmpty() ? null : list.get(0);
+  }
+
+  @Override
+  public <T extends EntidadeAbstrata> List<T> findBy(String queryName, Map<String, Object> parameters, int resultLimit)
   {
     Query query = em.createNamedQuery(queryName);
     
@@ -87,13 +124,13 @@ public class DaoServiceBean implements DaoService
   }
 
   @Override
-  public <T> List<T> findAll(Class<T> type)
+  public <T extends EntidadeAbstrata> List<T> findAll(Class<T> type)
   {
     return findAll(type, 0);
   }
 
   @Override
-  public <T> List<T> findAll(Class<T> type, int resultLimit)
+  public <T extends EntidadeAbstrata> List<T> findAll(Class<T> type, int resultLimit)
   {
     String entityName = em.getMetamodel().entity(type).getName();
     Query q = em.createQuery("FROM " + entityName);

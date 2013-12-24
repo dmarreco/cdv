@@ -17,15 +17,15 @@
             <h:panelGrid columns="3" columnClasses="titleCell">
                 <h:outputLabel for="cnpj" value="CNPJ:"/>
                 <h:inputText id="cnpj" value="#{novoFornecedor.cnpj}" />
-                <h:message for="cnpj" errorClass="invalid"/>
+                <h:messages for="cnpj" errorClass="invalid"/>
 
                 <h:outputLabel for="razaoSocial" value="Razão Social:"/>
                 <h:inputText id="razaoSocial" value="#{novoFornecedor.razaoSocial}" />
-                <h:message for="razaoSocial" errorClass="invalid"/>
+                <h:messages for="razaoSocial" errorClass="invalid"/>
 
                 <h:outputLabel for="email" value="Email:"/>
                 <h:inputText id="email" value="#{novoFornecedor.email}" />
-                <h:message for="email" errorClass="invalid"/>
+                <h:messages for="email" errorClass="invalid"/>
             </h:panelGrid>
 
             <p>
