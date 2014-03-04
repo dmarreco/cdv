@@ -147,8 +147,7 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>${version.surefire.plugin}</version>
                         <configuration>
-                            Fork every test because it will launch a separate
-                            AS instance
+                            <!-- Fork every test because it will launch a separate AS instance -->
                             <forkMode>never</forkMode>
                             <systemPropertyVariables>
                                 <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
