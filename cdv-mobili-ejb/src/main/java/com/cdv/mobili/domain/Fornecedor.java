@@ -35,7 +35,7 @@ public class Fornecedor extends EntidadeAbstrata
     public static final String findByCnpj = PREFIX + "findByCnpj";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
